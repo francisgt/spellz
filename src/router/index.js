@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import SpellBook from '@/components/SpellBook'
 import SpellsList from '@/components/SpellsList'
 import Spell from '@/components/Spell'
 
@@ -12,5 +13,8 @@ export default new Router({
   }, {
     path: '/spell/:name',
     component: Spell
+  }, {
+    path: '/book',
+    component: SpellBook
   }]
 })

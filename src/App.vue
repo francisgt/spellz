@@ -1,6 +1,15 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="scrollview">
+      <router-view/>
+    </div>
+
+    <md-bottom-bar class="md-primary md-elevation-1" md-mode="shift">
+      <md-bottom-bar-item @click.native="navigate('/')" exact md-label="Spellz" md-icon="list"></md-bottom-bar-item>
+      <md-bottom-bar-item @click.native="navigate('/book')" md-label="Spellbook" md-icon="book"></md-bottom-bar-item>
+      <md-bottom-bar-item @click.native="navigate('/character')" md-label="Character" md-icon="person"></md-bottom-bar-item>
+    </md-bottom-bar>
+
   </div>
 </template>
 
@@ -9,11 +18,26 @@
     name: 'app',
     created () {
       this.$store.dispatch('init')
+    },
+    methods: {
+      navigate (path) {
+        this.$router.push(path)
+      }
     }
   }
 </script>
 
 <style lang="scss">
+
+  #app {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .scrollview {
+    height: calc(100vh - 56px);
+    overflow: auto;
+  }
 
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons");
   @import "~vue-material/dist/theme/engine"; // Import the theme engine
@@ -21,21 +45,10 @@
   @include md-register-theme("default", (
     primary: md-get-palette-color(red, A400),
     accent: md-get-palette-color(pink, A200),
-    theme: 'dark'
+    theme: 'light'
   ));
 
   @import "~vue-material/dist/theme/all"; // Apply the theme
-
-  $primary-700: md-get-palette-color(purple, 700);
-  $primary-800: md-get-palette-color(purple, 800);
-
-  .primary-700 {
-    background-color: $primary-700!important;
-  }
-
-  .primary-800 {
-    background-color: $primary-800!important;
-  }
 
   $schools: (
     'abjuration': md-get-palette-color(indigo, 500),

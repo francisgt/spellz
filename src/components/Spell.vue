@@ -7,14 +7,19 @@
      <h3 class="md-title" style="flex: 1">{{ spell.name }}<md-icon v-if="spell.ritual == 'yes'" class="md-accent">whatshot</md-icon></h3>
 
       <md-button @click="toggleKnownSpell(spell)" class="md-icon-button">
-        <md-icon v-if="!spellIsKnown(spell)">check_box_outline_blank</md-icon>
-        <md-icon v-if="spellIsKnown(spell)">check_box</md-icon>
+        <md-icon class="md-primary" v-if="!spellIsKnown(spell)">check_box_outline_blank</md-icon>
+        <md-icon class="md-primary" v-if="spellIsKnown(spell)">check_box</md-icon>
       </md-button>
 
     </md-app-toolbar>
     <md-app-content>
-      <p><strong>Range</strong> {{ spell.range }}</p>
-      <p><strong>Duration</strong> {{ spell.duration }}</p>
+      <p>
+        <strong>Range</strong> {{ spell.range }}<br>
+        <strong>Duration</strong> {{ spell.duration }}<br>
+        <strong>Concentration</strong> {{ spell.concentration }}<br>
+        <strong>Casting time</strong> {{ spell.casting_time }}<br>
+        {{ spell.school }} {{ humanized[spell.level] }}
+      </p>
 
       <div v-html="spell.desc"></div>
     </md-app-content>
@@ -24,17 +29,16 @@
 <script>
   import _ from 'underscore'
   import spells from '@/spells'
+  import { humanized } from '@/spells-levels'
 
   import { mapActions, mapGetters, mapState } from 'vuex'
 
   export default {
     name: 'Spell',
-    created () {
-      console.log('hai', this.knownSpells)
-    },
     data () {
       return {
-        spell: _.find(spells, {name: this.$route.params.name})
+        spell: _.find(spells, {name: this.$route.params.name}),
+        humanized
       }
     },
     methods: {

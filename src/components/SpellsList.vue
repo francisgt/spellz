@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-toolbar md-elevation="1">
+    <md-toolbar md-elevation="0">
       <md-field md-clearable>
         <label>Recherche</label>
         <md-input v-model="searchTerm"></md-input>
@@ -12,7 +12,7 @@
         <md-list-item>
           <router-link :to="`/spell/${spell.name}`">
             <div class="md-list-item-text">
-              <span>{{ spell.name }} <md-icon v-if="spell.ritual == 'yes'" class="md-accent">whatshot</md-icon></span>
+              <span>{{ spell.name }} <md-icon v-if="spell.ritual == 'yes'" class="md-primary">whatshot</md-icon></span>
               <span><strong>Range</strong> {{ spell.range }}</span>
               <span><strong>Duration</strong> {{ spell.duration }}</span>
             </div>
@@ -88,7 +88,7 @@
 <style lang="sass" scoped>
 
   .md-theme-default a:not(.md-button)
-    color: white
+    color: #212121
     width: 100%
 
     &:focus
@@ -100,8 +100,13 @@
   .md-list .md-list-item-content
     padding-top: 15px
 
-
-  .md-list-item-text span i
-    width: auto
+  .md-list-item-text
+    span
+      &:first-child
+        display: flex
+        align-items: center
+      i
+        width: auto
+        margin-left: 5px
 
 </style>

@@ -7,6 +7,7 @@ import 'vue-material/dist/vue-material.min.css'
 import App from './App'
 import store from './store'
 import router from './router'
+import FastClick from 'fastclick'
 
 Vue.use(VueResource)
 Vue.use(VueMaterial)
@@ -20,3 +21,9 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function () {
+    FastClick.attach(document.body)
+  }, false)
+}
